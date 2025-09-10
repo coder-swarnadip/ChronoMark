@@ -1,31 +1,31 @@
-# 📚 Smart Attendance System  
+#  Smart Attendance System  
 
 A **full-stack attendance management system** where teachers and students can register/login, CRUD on classes, and mark/view attendance.  
 Built using **MERN stack** with authentication, cookies-based JWT, and a clean frontend flow.  
 
 ---
 
-## ⚡ Features  
+##  Features  
 
-### 👩‍🏫 Teacher Side
+###  Teacher Side
 - Register/Login with authentication  
 - View teachers dashboard  
 - Create and manage classes (CRUD operation)  
 - View attendance reports by selected date  
 
-### 🎓 Student Side
+###  Student Side
 - Register/Login with authentication  
 - Access student dashboard  
 - Check attendance records by classes  
 
-### 📊 Attendance Management
+###  Attendance Management
 - Teacher can mark attendance and view by date  
 - Students can view their status by each class  
 - Stored in MongoDB with date-based records  
 
 ---
 
-## 🛠️ Tech Stack  
+##  Tech Stack  
 
 ### Frontend  
 - React (with React Router DOM)  
@@ -42,7 +42,7 @@ Built using **MERN stack** with authentication, cookies-based JWT, and a clean f
 
 ---
 
-## 📂 Project Structure  
+##  Project Structure  
 
 ```
 ├── frontend/           # React App
@@ -125,12 +125,12 @@ Frontend runs on: **http://localhost:5173**
 
 ---
 
-## 🚀 Future Enhancements  
-- 📱 QR code-based attendance with ESP32-CAM integration  
-- 📊 Analytics dashboard for attendance insights  
-- 🔔 Notifications for absent students  
+##  Future Enhancements  
+-  QR code-based attendance with ESP32-CAM integration  
+-  Analytics dashboard for attendance insights  
+-  Notifications for absent students  
 
 ---
 
-## 📜 License  
+##  License  
 MIT License © 2025  
