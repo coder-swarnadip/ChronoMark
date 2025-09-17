@@ -29,12 +29,13 @@ app.use(
   cors({
    // origin: ["http://localhost:5173","https://chronomark-frontend.netlify.app"],
  // my frontend origin
- origin: "https://chronomark-frontend.onrender.com",
+ origin: "https://chronomark-frontend.netlify.app",
     credentials: true, //  allow cookies & credentials
   })
 );
 
 
+app.use(express.static(path.join(__dirname, "build")));
 
 
 
@@ -78,6 +79,7 @@ app.use("/api/attendance", attendanceSessionRoutes);
 app.get("/", (req, res) => {
   res.send("✅ API is running...");
 });
+
 
 
 
