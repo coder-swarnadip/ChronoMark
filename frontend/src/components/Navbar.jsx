@@ -34,7 +34,7 @@ const Navbar = ({
       });
       setTimeout(() => {
         setMessage(null);
-        navigate("/home");
+        navigate("/");
       });
     } catch (err) {
       console.error("Logout failed", err);
@@ -43,7 +43,7 @@ const Navbar = ({
   };
 
   const goToProfile = () => {
-    navigate("/home");
+    navigate("/");
   };
 
   return (

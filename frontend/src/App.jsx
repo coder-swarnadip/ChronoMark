@@ -64,7 +64,7 @@ function App() {
           }
         >
 
-          <Route path="/home" element={<Home isAuthenticated={isAuthenticated}
+          <Route path="/" element={<Home isAuthenticated={isAuthenticated}
             isAuthenticatedStudent={isAuthenticatedStudent} />} />
           <Route path="/register" element={<TeacherRegister />} />
           <Route
