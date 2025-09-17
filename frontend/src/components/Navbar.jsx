@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { logoutTeacher } from "../api/teacherApi";
 import { logoutStudent } from "../api/studentApi";
 import { FiLogIn } from "react-icons/fi";
-import Logo from "../assets/logo1.png";
+import Logo from "../assets/Logo1.png";
 
 const Navbar = ({
   teacherName,
