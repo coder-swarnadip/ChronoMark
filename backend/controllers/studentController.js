@@ -152,7 +152,7 @@ exports.getStudentProfile = async (req, res) => {
 exports.logoutStudent = (req, res) => {
   res.cookie("jwt", "", {
     httpOnly: true,
-    secure: process.env.NODE_ENV === "production",
+    secure: true,
     sameSite: "strict",
     expires: new Date(0), // ✅ expire immediately
   });

@@ -109,7 +109,7 @@ exports.getTeacherProfile = async (req, res) => {
 exports.logoutTeacher = (req, res) => {
   res.cookie("jwt", "", {
     httpOnly: true,
-    secure: process.env.NODE_ENV === "production",
+    secure: true,
     sameSite: "strict",
     expires: new Date(0), //  cookie expires 
   });
