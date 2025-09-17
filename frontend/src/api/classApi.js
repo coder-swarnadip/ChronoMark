@@ -21,3 +21,5 @@ export const removeStudent = (classId, studentId) =>
   API.patch(`/${classId}/students/${studentId}/remove`);
 
 export const getClassById = (classId) => API.get(`/${classId}`);
+
+export const getClassforStudents = (classId) => API.get(`/student/${classId}`);

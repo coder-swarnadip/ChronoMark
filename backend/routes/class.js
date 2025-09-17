@@ -8,9 +8,11 @@ const {
   removeStudentFromClass, 
   editClass, 
   deleteClass, 
-  getClassById
+  getClassById,
+  getClassforStudents
 } = require("../controllers/classController.js");
 const authTeacher = require("../middleware/teacherAuth.js");
+const authStudent = require("../middleware/studentAuth.js");
 
 
 //Middleware to validate MongoDB ObjectId
@@ -36,7 +38,10 @@ router.post("/", authTeacher, createClass);
 //for Teacher can see all their own classes
 router.get("/my-classes", authTeacher, getMyClasses);
 
-router.get("/:id", authTeacher,  getClassById);
+router.get("/:id", authTeacher, getClassById);
+
+
+
 
 //for Teacher can edit a class
 router.put("/:id", authTeacher,  editClass);
@@ -51,5 +56,7 @@ router.patch("/:classId/students/:studentId/add", authTeacher, validateObjectId,
 
 //for Remove a student from a class
 router.patch("/:classId/students/:studentId/remove", authTeacher, validateObjectId, removeStudentFromClass);
+
+router.get("/student/:id", authStudent, getClassforStudents);
 
 module.exports = router;

@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import { getStudentProfile } from "../api/studentApi";
-import { FaUser, FaIdCard, FaEnvelope, FaGraduationCap, FaChalkboardTeacher } from "react-icons/fa"; // 💡 New icons
-//import { useNavigate } from "react-router-dom";
+import { FaUser, FaIdCard, FaGraduationCap, FaChalkboardTeacher } from "react-icons/fa";
+import StudentQr from "../components/StudentQr";
 
 export default function StudentProfile() {
   const [student, setStudent] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
-//   const navigate = useNavigate();
+  const [activeQrClassId, setActiveQrClassId] = useState(null);
 
   useEffect(() => {
     const fetchProfile = async () => {
@@ -56,18 +56,6 @@ export default function StudentProfile() {
 
   return (
     <div className="p-8 max-w-2xl mx-auto my-12 bg-white shadow-xl rounded-3xl border border-gray-200">
-      <div className="flex justify-between items-start mb-8">
-        <h1 className="text-3xl font-extrabold text-gray-800">
-          Student Profile
-        </h1>
-        {/* <button
-          onClick={() => navigate("/dashboard")}
-          className="px-6 py-2 rounded-full bg-indigo-600 text-white font-semibold shadow-md hover:bg-indigo-700 transition"
-        >
-          Go to Dashboard
-        </button> */}
-      </div>
-
       {/* Profile Card */}
       <div className="bg-gray-50 p-6 rounded-2xl border border-gray-100 mb-8">
         <div className="flex items-center space-x-4 mb-4">
@@ -94,7 +82,7 @@ export default function StudentProfile() {
         </div>
       </div>
 
-      {/* Enrolled Classes Section */}
+      {/* Enrolled Classes */}
       <div>
         <h2 className="text-xl font-bold text-gray-800 mb-4">Enrolled Classes & Attendance</h2>
         {student?.classes?.length > 0 ? (
@@ -103,32 +91,36 @@ export default function StudentProfile() {
               const percentage =
                 cls.attendance.totalClasses === 0
                   ? 0
-                  : (
-                      (cls.attendance.attendedClasses / cls.attendance.totalClasses) *
-                      100
-                    ).toFixed(2);
+                  : ((cls.attendance.attendedClasses / cls.attendance.totalClasses) * 100).toFixed(2);
               const attendanceColorClass = getAttendanceColor(percentage);
 
               return (
-                <li
-                  key={cls._id}
-                  className="p-5 bg-white rounded-xl shadow-sm border border-gray-100 hover:shadow-lg transition-shadow"
-                >
+                <li key={cls._id} className="p-5 bg-white rounded-xl shadow-sm border border-gray-100 hover:shadow-lg transition-shadow">
                   <div className="flex items-center justify-between mb-2">
                     <p className="font-semibold text-lg text-gray-800">
                       <FaChalkboardTeacher className="inline-block mr-2 text-gray-500" />
                       {cls.name}
                     </p>
-                    <span className={`text-sm font-bold ${attendanceColorClass.replace('bg', 'text')}`}>
-                      {percentage}%
-                    </span>
+                    <div className="flex items-center gap-2">
+                      <button
+                        className="px-4 py-1 bg-blue-500 text-white rounded-full text-sm font-medium hover:bg-blue-600 transition"
+                        onClick={() => setActiveQrClassId(activeQrClassId === cls._id ? null : cls._id)}
+                      >
+                        Show QR
+                      </button>
+                      <span className={`text-sm font-bold ${attendanceColorClass.replace('bg', 'text')}`}>
+                        {percentage}%
+                      </span>
+                    </div>
                   </div>
-                  <p className="text-sm text-gray-500 mb-3">
-                    Subject: {cls.subject}
-                  </p>
-                  
+                  <p className="text-sm text-gray-500 mb-3">Subject: {cls.subject}</p>
+
+                  {activeQrClassId === cls._id && (
+                    <StudentQr classId={cls._id} studentId={student._id} />
+                  )}
+
                   {/* Attendance Progress Bar */}
-                  <div className="relative pt-1">
+                  <div className="relative pt-1 mt-4">
                     <div className="flex mb-2 items-center justify-between">
                       <div>
                         <span className="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full bg-indigo-200 text-indigo-600">
@@ -154,9 +146,7 @@ export default function StudentProfile() {
           </ul>
         ) : (
           <div className="text-center py-10 bg-gray-50 rounded-lg">
-            <p className="text-gray-500 italic">
-              You are not enrolled in any classes yet.
-            </p>
+            <p className="text-gray-500 italic">You are not enrolled in any classes yet.</p>
           </div>
         )}
       </div>

@@ -26,6 +26,37 @@ exports.markAttendance = async (req, res) => {
   }
 };
 
+
+
+
+exports.markAttendanceAuto = async (req, res) => {
+  try {
+    const { classId, sessionId, records } = req.body; 
+    if (!classId || !sessionId || !records?.length) {
+      return res.status(400).json({ message: "Missing required data" });
+    }
+
+    const date = getDateKey(); // Today in IST
+    const results = [];
+
+    for (const rec of records) {
+      const updated = await Attendance.findOneAndUpdate(
+        { studentId: rec.studentId, classId, date },
+        { status: rec.status, sessionId },
+        { upsert: true, new: true }
+      );
+      results.push(updated);
+    }
+
+    res.json({ message: "Attendance recorded", data: results });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Server error", error: err.message });
+  }
+};
+
+
+
 // 2. Get Attendance by Class & Date (Teacher)
 
 exports.getAttendanceByClassAndDate = async (req, res) => {

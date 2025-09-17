@@ -88,6 +88,19 @@ export default function ClassPage() {
                         <FaCheck />
                         Take Attendance
                     </button>
+
+                    <button
+                        onClick={() => {
+                            if (!selectedClass) return alert("No class selected!");
+                            navigate("/auto-attendance", { state: { selectedClass } });
+                        }}
+                        className="bg-yellow-500 hover:bg-yellow-600 text-white px-5 py-3 rounded-lg shadow transition flex items-center justify-center gap-2 w-full sm:w-auto"
+                    >
+                        <FaCheck />
+                        Auto Attendance
+                    </button>
+
+
                     <button
                         onClick={() => {
                             if (!selectedClass) return alert("No class selected!");
@@ -140,14 +153,7 @@ export default function ClassPage() {
 
                 {/* Modal */}
                 {showStudentList && (
-                    <div className="fixed inset-0 flex justify-center items-center z-50 bg-black/40 backdrop-blur-sm px-3">
-                        <div className="bg-white p-6 rounded-2xl shadow-xl max-w-xl w-full relative">
-                            <button
-                                onClick={() => setShowStudentList(false)}
-                                className="absolute top-3 right-3 text-red-500 font-bold text-lg"
-                            >
-                                ✖
-                            </button>
+                     <div className="fixed inset-0 flex justify-center items-center z-50 bg-black/40 backdrop-blur-sm px-3">
                             <StudentList
                                 classId={selectedClass._id}
                                 onClose={() => setShowStudentList(false)}
@@ -158,7 +164,7 @@ export default function ClassPage() {
                                     });
                                 }}
                             />
-                        </div>
+                     
                     </div>
                 )}
             </div>

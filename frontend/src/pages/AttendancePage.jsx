@@ -57,7 +57,7 @@ export default function AttendancePage() {
       await markAttendance({ classId: selectedClass._id, records });
       setMessage({ type: "success", text: "Attendance saved successfully!" });
       // Redirect after a short delay to allow the user to see the message
-      setTimeout(() => navigate(`/class/${selectedClass._id}`), 1500);
+      setTimeout(() => navigate(`/class/${selectedClass._id}`), 500);
     } catch (err) {
       console.error("Error saving attendance:", err);
       setMessage({ type: "error", text: "Failed to save attendance." });

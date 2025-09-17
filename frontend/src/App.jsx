@@ -13,6 +13,7 @@ import StudentProfile from "./pages/StudentDashboard.jsx";
 import Class from "./pages/Class.jsx";
 import Attendance from "./pages/AttendancePage.jsx";
 import ViewAttendance from "./components/ViewAttendance.jsx";
+import AttendanceScanner from "./pages/AttendanceScanner.jsx";
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(null);
@@ -89,6 +90,7 @@ function App() {
           <Route path="/StudentProfile" element={<StudentProfile />} />
           <Route path="/class/:id" element={<Class />} />
           <Route path="/attendance" element={<Attendance />} />
+          <Route path="/auto-attendance" element={<AttendanceScanner />} />
           <Route path="/view-attendance" element={<ViewAttendance />} />
         </Route>
       </Routes>

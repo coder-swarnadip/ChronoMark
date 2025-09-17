@@ -13,6 +13,7 @@ const teacherRoutes = require("./routes/teacher.js");
 const studentRoutes = require("./routes/student.js");
 const classRoutes = require("./routes/class.js");
 const attendanceRoutes = require("./routes/attendance");
+const attendanceSessionRoutes = require("./routes/attendanceSession");
 
 
 
@@ -65,9 +66,7 @@ app.use("/api/teachers", teacherRoutes);
 app.use("/api/students", studentRoutes);
 app.use("/api/classes", classRoutes);
 app.use("/api/attendance", attendanceRoutes);
-
-
-
+app.use("/api/attendance", attendanceSessionRoutes);
 
 // app.get("/health", (req, res) => {
 //   res.json({ status: "ok", message: "Backend running fine" });

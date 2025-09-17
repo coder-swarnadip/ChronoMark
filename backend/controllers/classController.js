@@ -74,6 +74,27 @@ exports.getMyClasses = async (req, res) => {
   }
 };
 
+exports.getClassforStudents = async (req, res) => {
+  try {
+    const classId = req.params.id;
+
+    const classData = await Class.findById(classId)
+      .populate("teacher", "name email")
+      
+
+    if (!classData) {
+      return res.status(404).json({ message: "Class not founddd" });
+    }
+
+    res.json(classData);
+  } catch (err) {
+    console.error("GetClassforStudents Error:", err);
+    res.status(500).json({ message: "Server error", error: err.message });
+  }
+};
+
+
+
 exports.getClassById = async (req, res) => {
   try {
     const classId = req.params.id;

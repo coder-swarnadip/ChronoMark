@@ -1,4 +1,4 @@
-#  Smart Attendance System  
+#  chronomark
 
 A **full-stack attendance management system** where teachers and students can register/login, CRUD on classes, and mark/view attendance.  
 Built using **MERN stack** with authentication, cookies-based JWT, and a clean frontend flow.  

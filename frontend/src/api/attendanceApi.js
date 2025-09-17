@@ -8,6 +8,8 @@ const API = axios.create({
 //  Teacher marks attendance for a class
 export const markAttendance = (data) => API.post("/mark", data);
 
+export const markAttendanceAuto = (data) => API.post("/auto", data);
+
 //  Teacher views attendance for a class on a specific date
 export const getAttendanceByClassAndDate = (classId, date) =>
   API.get(`/class/${classId}/${date}`);
