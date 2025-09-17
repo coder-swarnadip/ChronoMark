@@ -6,6 +6,7 @@ const Attendance = require("./models/Attendance");
 const { getDateKey } = require("./utils/dateHelper");
 const cookieParser = require("cookie-parser");
 const errorHandler = require("./errorHandelar.js");
+const path = require("path");
 
 
 // routes imports
@@ -19,6 +20,8 @@ const attendanceSessionRoutes = require("./routes/attendanceSession");
 
 require("dotenv").config();
 
+
+app.use(express.static(path.join(__dirname, "build")));
 const app = express();
 app.use(express.json());
 app.use(morgan("dev"));
@@ -79,6 +82,11 @@ app.get("/", (req, res) => {
   res.send("✅ API is running...");
 });
 
+
+app.use(express.static(path.join(__dirname, "build")));
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "build", "index.html"));
+});
 
 
 
