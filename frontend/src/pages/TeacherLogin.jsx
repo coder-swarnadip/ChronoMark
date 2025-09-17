@@ -88,7 +88,7 @@ export default function TeacherLogin({ setIsAuthenticated, setTeacherName }) {
         </Link>
       </p>
 
-        <p className="text-sm text-center text-gray-600 mt-4"><Link to="/home" className="hover:underline">Go back to Home</Link></p>
+        <p className="text-sm text-center text-gray-600 mt-4"><Link to="/" className="hover:underline">Go back to Home</Link></p>
 
     </div>
   );
