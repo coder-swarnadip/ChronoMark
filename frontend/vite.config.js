@@ -10,5 +10,8 @@ export default defineConfig({
   server: {
     host: true,       // <-- allows access from network
     port: 5173,       // optional, default is 5173
-  }
+  },
+  build: {
+    outDir: 'dist', // <-- this must match Netlify deploy directory
+  },
 })
