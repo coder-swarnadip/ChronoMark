@@ -88,20 +88,24 @@ exports.loginStudent = async (req, res) => {
 
 
 
+
 exports.getStudentProfile = async (req, res) => {
   try {
-    // ✅ Use the student from middleware and populate classes
-    const student = await req.student.populate("classes", "name subject");
+    // 1️⃣ Fetch student and populate class name + subject
+    const student = await Student.findById(req.student.id)
+      .select("-password")
+      .populate("classes", "name subject");
 
     if (!student) {
       return res.status(404).json({ message: "Student not found" });
     }
 
-    // ✅ Fetch all attendance records for this student
+    // 2️⃣ Fetch all attendance records of this student at once
     const attendanceRecords = await Attendance.find({ studentId: student._id });
 
-    // Build map: classId -> { totalClasses, attendedClasses }
+    // 3️⃣ Build a map: classId -> { totalClasses, attendedClasses }
     const attendanceMap = {};
+
     student.classes.forEach(cls => {
       attendanceMap[cls._id] = { totalClasses: 0, attendedClasses: 0 };
     });
@@ -115,7 +119,7 @@ exports.getStudentProfile = async (req, res) => {
       }
     });
 
-    // Attach attendance info to classes
+    // 4️⃣ Attach attendance info to each class
     const classesWithAttendance = student.classes.map(cls => ({
       _id: cls._id,
       name: cls.name,
@@ -123,21 +127,20 @@ exports.getStudentProfile = async (req, res) => {
       attendance: attendanceMap[cls._id] || { totalClasses: 0, attendedClasses: 0 },
     }));
 
-    // ✅ Send profile response
+    // 5️⃣ Send response
     res.json({
       _id: student._id,
       name: student.name,
       email: student.email,
       rollNo: student.rollNo,
-      classes: classesWithAttendance,
+      classes: classesWithAttendance
     });
 
   } catch (error) {
     console.error("Error fetching student profile:", error);
-    res.status(500).json({ message: "Server error", error: error.message });
+    res.status(500).json({ message: "Server error", error });
   }
 };
-
 
 
 
