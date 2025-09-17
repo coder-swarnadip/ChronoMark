@@ -1,0 +1,9 @@
+{
+  "root": "build/",
+  "routes": [
+    {
+      "path": "/*",
+      "rewrite": "/index.html"
+    }
+  ]
+}
