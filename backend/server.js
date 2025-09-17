@@ -73,6 +73,11 @@ app.use("/api/attendance", attendanceSessionRoutes);
 // });
 
 
+app.get("/", (req, res) => {
+  res.send("✅ API is running...");
+});
+
+
 
 
 //connect mongoose
