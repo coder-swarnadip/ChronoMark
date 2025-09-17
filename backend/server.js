@@ -15,17 +15,23 @@ const attendanceSessionRoutes = require("./routes/attendanceSession");
 require("dotenv").config();
 
 const app = express();
+const isProd = process.env.NODE_ENV === "production";
 
 // Middleware
 app.use(express.json());
 app.use(morgan("dev"));
 app.use(cookieParser());
 
-// CORS config
+// ✅ CORS setup for cross-origin cookies
+const allowedOrigins = ["https://chronomark-frontend.netlify.app"];
 app.use(
   cors({
-    origin: "https://chronomark-frontend.netlify.app", // frontend URL
-    credentials: true,
+    origin: function (origin, callback) {
+      if (!origin) return callback(null, true); // allow Postman / curl
+      if (allowedOrigins.includes(origin)) return callback(null, true);
+      return callback(new Error("Not allowed by CORS"));
+    },
+    credentials: true, // allow cookies
   })
 );
 
@@ -57,5 +63,6 @@ mongoose
   .then(() => console.log("✅ MongoDB connected"))
   .catch((err) => console.error("❌ MongoDB error:", err));
 
+// Start server
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
