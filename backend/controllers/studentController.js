@@ -68,7 +68,7 @@ exports.loginStudent = async (req, res) => {
     // store in httpOnly cookie
     res.cookie("jwt", token, {
       httpOnly: true,
-      secure:true, // set true in production****
+      secure:true, 
       sameSite: "strict",
       maxAge: 7 * 24 * 60 * 60 * 1000, // ✅ 7 days in ms
     });
@@ -154,7 +154,7 @@ exports.logoutStudent = (req, res) => {
     httpOnly: true,
     secure: true,
     sameSite: "strict",
-    expires: new Date(0), // ✅ expire immediately
+    expires: new Date(0),
   });
   res.json({ message: "Logged out successfully" });
 };
