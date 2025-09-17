@@ -68,7 +68,7 @@ exports.loginStudent = async (req, res) => {
     // store in httpOnly cookie
     res.cookie("jwt", token, {
       httpOnly: true,
-      secure: process.env.NODE_ENV === "production", // set true in production****
+      secure:true, // set true in production****
       sameSite: "strict",
       maxAge: 7 * 24 * 60 * 60 * 1000, // ✅ 7 days in ms
     });
