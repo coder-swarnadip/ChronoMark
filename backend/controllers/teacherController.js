@@ -67,12 +67,12 @@ exports.loginTeacher = async (req, res) => {
     );
 
     // Set cookie
-    res.cookie("jwt", token, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === "production", // set true in production
-      sameSite: "strict",
-      maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days in ms
-    });
+  res.cookie("jwt", token, {
+  httpOnly: true,
+  secure: true, // must be HTTPS in production
+  sameSite: "none",
+  maxAge: 7 * 24 * 60 * 60 * 1000,
+});
 
     // send teacher data (without password)
     res.json({
