@@ -27,7 +27,9 @@ app.use(cookieParser());
 
 app.use(
   cors({
-    origin: ["http://localhost:5173","https://chronomark-frontend.netlify.app"], // my frontend origin
+   // origin: ["http://localhost:5173","https://chronomark-frontend.netlify.app"],
+ // my frontend origin
+ origin: "https://chronomark-frontend.netlify.app",
     credentials: true, //  allow cookies & credentials
   })
 );
